@@ -1,19 +1,28 @@
 <template>
   <v-app>
     <v-main>
-      <score-board :team1="team1" :team2="team2" />
-      <v-row>
-        <v-col>
-          <point-tracker
-            :score="team1.score"
-            @increase="increaseScore"
-            @decrease="decreaseScore"
-          />
+      <v-container>
+        <v-col align="center">
+          <score-board :team1="team1" :team2="team2" />
+          <game-status :team1="team1" :team2="team2" />
+          <v-row>
+            <v-col>
+              <point-tracker
+                :score="team1.score"
+                @increase="changeScore(team1, 1)"
+                @decrease="changeScore(team1, -1)"
+              />
+            </v-col>
+            <v-col>
+              <point-tracker
+                :score="team2.score"
+                @increase="changeScore(team2, 1)"
+                @decrease="changeScore(team2, -1)"
+              />
+            </v-col>
+          </v-row>
         </v-col>
-        <v-col>
-          <point-tracker :score="team2.score" />
-        </v-col>
-      </v-row>
+      </v-container>
     </v-main>
   </v-app>
 </template>
@@ -21,6 +30,7 @@
 <script>
 import ScoreBoard from "./components/ScoreBoard.vue";
 import PointTracker from "./components/PointTracker.vue";
+import GameStatus from "./components/GameStatus.vue";
 
 export default {
   name: "App",
@@ -28,6 +38,7 @@ export default {
   components: {
     ScoreBoard,
     PointTracker,
+    GameStatus,
   },
 
   data() {
@@ -37,12 +48,10 @@ export default {
     };
   },
   methods: {
-    increaseScore() {
-      console.log("I should increase score");
-    },
-
-    decreaseScore() {
-      console.log("I should decrease score");
+    changeScore(team, amount) {
+      const updated = team.score + amount;
+      team.score = updated;
+      console.log(updated);
     },
   },
 };

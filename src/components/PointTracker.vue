@@ -4,10 +4,20 @@
       <v-card elevation="4" outlined shaped width="500">
         <v-card-text class="text-center">
           <h1 class="score-total">{{ score }}</h1>
-          <v-btn class="score-button" elevation="2" fab @click="decreaseScore"
+          <v-btn
+            class="score-button"
+            color="rgba(241, 169, 160, 1)"
+            elevation="2"
+            fab
+            @click="decreaseScore"
             ><h3>-</h3></v-btn
           >
-          <v-btn class="score-button" elevation="2" fab @click="increaseScore"
+          <v-btn
+            class="score-button"
+            color="rgba(102, 204, 153, 1)"
+            elevation="2"
+            fab
+            @click="increaseScore"
             ><h3>+</h3></v-btn
           >
         </v-card-text>
