@@ -3,25 +3,21 @@
     <v-container>
       <v-row justify="center">
         <div class="Score-Board">
-          <div class="Team-Titles">Team 1 vs Team 2</div>
+          <div class="Team-Titles">
+            <h2>{{ team1.name }} vs {{ team2.name }}</h2>
+          </div>
         </div>
-      </v-row>
-      <v-row>
-        <v-col>
-          <point-tracker />
-        </v-col>
-        <v-col>
-          <point-tracker />
-        </v-col>
       </v-row>
     </v-container>
   </v-main>
 </template>
 
 <script>
-import PointTracker from "./PointTracker";
 export default {
-  components: { PointTracker },
+  data() {
+    return {};
+  },
+  props: ["team1", "team2"],
 };
 </script>
 
