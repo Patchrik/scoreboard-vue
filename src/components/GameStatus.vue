@@ -11,10 +11,10 @@ export default {
     gameStatus() {
       if (this.team1.score > this.team2.score) {
         const difference = this.team1.score - this.team2.score;
-        return `Team 1 is currently winning by ${difference}`;
+        return `${this.team1.name} is currently winning by ${difference}`;
       } else if (this.team1.score < this.team2.score) {
         const difference = this.team2.score - this.team1.score;
-        return `Team 2 is currently winning by ${difference}`;
+        return `${this.team2.name} is currently winning by ${difference}`;
       } else {
         return "The game is tied";
       }
@@ -23,4 +23,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped>
+.Game-Status {
+  margin: 1em;
+}
+</style>
