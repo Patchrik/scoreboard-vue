@@ -3,26 +3,34 @@
     <v-main>
       <v-container>
         <v-col align="center">
-          <score-board
-            :team1="team1"
-            :team2="team2"
-            @input1="updateName1"
-            @input2="updateName2"
+          <game-type
+            :GameType="gameType.Current"
+            @game-change="handleGameChange"
           />
-          <game-status :team1="team1" :team2="team2" />
+          <score-board
+            :team1="gameType.Current.team1"
+            :team2="gameType.Current.team2"
+            @update-team-name="handleUpdateName"
+          />
+          <game-status
+            :team1="gameType.Current.team1"
+            :team2="gameType.Current.team2"
+          />
           <v-row>
             <v-col>
               <point-tracker
-                :score="team1.score"
-                @increase="changeScore(team1, 1)"
-                @decrease="changeScore(team1, -1)"
+                :scoreType="gameType.Current.scoreType"
+                :score="gameType.Current.team1.score"
+                @increase="changeScore($event, gameType.Current.team1)"
+                @decrease="changeScore($event, gameType.Current.team1)"
               />
             </v-col>
             <v-col>
               <point-tracker
-                :score="team2.score"
-                @increase="changeScore(team2, 1)"
-                @decrease="changeScore(team2, -1)"
+                :scoreType="gameType.Current.scoreType"
+                :score="gameType.Current.team2.score"
+                @increase="changeScore($event, gameType.Current.team2)"
+                @decrease="changeScore($event, gameType.Current.team2)"
               />
             </v-col>
           </v-row>
@@ -36,6 +44,7 @@
 import ScoreBoard from "./components/ScoreBoard.vue";
 import PointTracker from "./components/PointTracker.vue";
 import GameStatus from "./components/GameStatus.vue";
+import GameType from "./components/GameType.vue";
 
 export default {
   name: "App",
@@ -44,25 +53,31 @@ export default {
     ScoreBoard,
     PointTracker,
     GameStatus,
+    GameType,
   },
 
   data() {
     return {
-      team1: { name: "Team 1", score: 20 },
-      team2: { name: "Team 2", score: 20 },
+      gameType: {
+        Current: {
+          name: "Magic The Gathering",
+          team1: { name: "Player 1", score: 20 },
+          team2: { name: "Player 2", score: 20 },
+          scoreType: { lgMinus: -5, stdMinus: -1, stdAdd: 1, lgAdd: 5 },
+        },
+      },
     };
   },
   methods: {
-    changeScore(team, amount) {
-      const updated = team.score + amount;
+    changeScore(event, team) {
+      const updated = team.score + event;
       team.score = updated;
-      console.log(updated);
     },
-    updateName1(item) {
-      this.team1.name = item;
+    handleUpdateName({ team, name }) {
+      team.name = name;
     },
-    updateName2(item) {
-      this.team2.name = item;
+    handleGameChange(choice) {
+      this.gameType.Current = choice;
     },
   },
 };

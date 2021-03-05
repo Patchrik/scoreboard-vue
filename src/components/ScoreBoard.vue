@@ -2,7 +2,6 @@
   <v-main>
     <v-container>
       <v-row justify="center">
-        <h1>MTG Life Tracker</h1>
         <div class="Score-Board">
           <div class="team-titles">
             <v-row>
@@ -10,7 +9,8 @@
                 <input
                   :class="winning(team1, team2)"
                   type="text"
-                  v-model="inputName1"
+                  :value="team1.name"
+                  @keyup="changeTeamName(team1, $event.target.value)"
                 />
               </v-col>
               vs
@@ -18,7 +18,8 @@
                 <input
                   :class="winning(team2, team1)"
                   type="text"
-                  v-model="inputName2"
+                  :value="team2.name"
+                  @keyup="changeTeamName(team2, $event.target.value)"
                 />
               </v-col>
             </v-row>
@@ -32,7 +33,10 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      inputName1: this.team1.name,
+      inputName2: this.team2.name,
+    };
   },
   props: ["team1", "team2"],
   methods: {
@@ -41,23 +45,8 @@ export default {
         return "winning";
       }
     },
-  },
-  computed: {
-    inputName1: {
-      get() {
-        return this.team1.name;
-      },
-      set(newName) {
-        this.$emit("input1", newName);
-      },
-    },
-    inputName2: {
-      get() {
-        return this.team2.name;
-      },
-      set(newName) {
-        this.$emit("input2", newName);
-      },
+    changeTeamName(team, name) {
+      this.$emit("update-team-name", { team, name });
     },
   },
 };

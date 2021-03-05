@@ -9,16 +9,32 @@
             color="rgba(241, 169, 160, 1)"
             elevation="2"
             fab
-            @click="decreaseScore"
-            ><h3>-</h3></v-btn
+            @click="decreaseScore(scoreType.lgMinus)"
+            ><h3>{{ scoreType.lgMinus }}</h3></v-btn
+          >
+          <v-btn
+            class="score-button"
+            color="rgba(241, 169, 160, 1)"
+            elevation="2"
+            fab
+            @click="decreaseScore(scoreType.stdMinus)"
+            ><h3>{{ scoreType.stdMinus }}</h3></v-btn
           >
           <v-btn
             class="score-button"
             color="rgba(102, 204, 153, 1)"
             elevation="2"
             fab
-            @click="increaseScore"
-            ><h3>+</h3></v-btn
+            @click="increaseScore(scoreType.stdAdd)"
+            ><h3>+{{ scoreType.stdAdd }}</h3></v-btn
+          >
+          <v-btn
+            class="score-button"
+            color="rgba(102, 204, 153, 1)"
+            elevation="2"
+            fab
+            @click="increaseScore(scoreType.lgAdd)"
+            ><h3>+{{ scoreType.lgAdd }}</h3></v-btn
           >
         </v-card-text>
       </v-card>
@@ -27,30 +43,30 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {};
-  },
-  props: ["score"],
-  methods: {
-    increaseScore() {
-      this.$emit("increase");
+  export default {
+    data() {
+      return {};
     },
-    decreaseScore() {
-      if (this.score > 0) {
-        this.$emit("decrease");
-      }
+    props: ["score", "scoreType"],
+    methods: {
+      increaseScore(amount) {
+        this.$emit("increase", amount);
+      },
+      decreaseScore(amount) {
+        if (this.score > 0) {
+          this.$emit("decrease", amount);
+        }
+      },
     },
-  },
-};
+  };
 </script>
 
 <style>
-.score-button {
-  margin: 0.5em;
-}
-.score-total {
-  font-size: 100px;
-  margin: 0.5em;
-}
+  .score-button {
+    margin: 0.5em;
+  }
+  .score-total {
+    font-size: 100px;
+    margin: 0.5em;
+  }
 </style>
