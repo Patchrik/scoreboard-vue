@@ -41,44 +41,46 @@
 </template>
 
 <script>
-import ScoreBoard from "./components/ScoreBoard.vue";
-import PointTracker from "./components/PointTracker.vue";
-import GameStatus from "./components/GameStatus.vue";
-import GameType from "./components/GameType.vue";
+  import ScoreBoard from "./components/ScoreBoard.vue";
+  import PointTracker from "./components/PointTracker.vue";
+  import GameStatus from "./components/GameStatus.vue";
+  import GameType from "./components/GameType.vue";
 
-export default {
-  name: "App",
+  export default {
+    name: "App",
 
-  components: {
-    ScoreBoard,
-    PointTracker,
-    GameStatus,
-    GameType,
-  },
+    components: {
+      ScoreBoard,
+      PointTracker,
+      GameStatus,
+      GameType,
+    },
 
-  data() {
-    return {
-      gameType: {
-        Current: {
-          name: "Magic The Gathering",
-          team1: { name: "Player 1", score: 20 },
-          team2: { name: "Player 2", score: 20 },
-          scoreType: { lgMinus: -5, stdMinus: -1, stdAdd: 1, lgAdd: 5 },
+    data() {
+      return {
+        gameType: {
+          Current: {
+            name: "Magic The Gathering",
+            team1: { name: "Player 1", score: 20 },
+            team2: { name: "Player 2", score: 20 },
+            scoreType: { lgMinus: -5, stdMinus: -1, stdAdd: 1, lgAdd: 5 },
+          },
         },
+      };
+    },
+    methods: {
+      changeScore(event, team) {
+        const updated = team.score + event;
+        if (updated >= 0) {
+          team.score = updated;
+        }
       },
-    };
-  },
-  methods: {
-    changeScore(event, team) {
-      const updated = team.score + event;
-      team.score = updated;
+      handleUpdateName({ team, name }) {
+        team.name = name;
+      },
+      handleGameChange(choice) {
+        this.gameType.Current = choice;
+      },
     },
-    handleUpdateName({ team, name }) {
-      team.name = name;
-    },
-    handleGameChange(choice) {
-      this.gameType.Current = choice;
-    },
-  },
-};
+  };
 </script>

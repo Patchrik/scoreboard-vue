@@ -53,9 +53,7 @@
         this.$emit("increase", amount);
       },
       decreaseScore(amount) {
-        if (this.score > 0) {
-          this.$emit("decrease", amount);
-        }
+        this.$emit("decrease", amount);
       },
     },
   };
