@@ -22,22 +22,22 @@ export default {
           name: "Magic The Gathering",
           team1: { name: "Player 1", score: 20 },
           team2: { name: "Player 2", score: 20 },
-          scoreType: { lgMinus: -5, stdMinus: -1, stdAdd: 1, lgAdd: 5 },
+          scoreType: { lgMinus: -5, stdMinus: -1, stdAdd: 1, lgAdd: 5 }
         },
         YUGIOH: {
           name: "Yu-Gi-Oh",
           team1: { name: "Player 1", score: 8000 },
           team2: { name: "Player 2", score: 8000 },
-          scoreType: { lgMinus: -100, stdMinus: -50, stdAdd: 50, lgAdd: 100 },
-        },
-      },
+          scoreType: { lgMinus: -100, stdMinus: -50, stdAdd: 50, lgAdd: 100 }
+        }
+      }
     };
   },
   methods: {
     gameChoice(choice) {
       this.$emit("game-change", choice);
-    },
-  },
+    }
+  }
 };
 </script>
 

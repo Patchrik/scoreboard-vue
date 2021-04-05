@@ -18,8 +18,8 @@ export default {
       } else {
         return "The game is tied";
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

@@ -43,28 +43,28 @@
 </template>
 
 <script>
-  export default {
-    data() {
-      return {};
+export default {
+  data() {
+    return {};
+  },
+  props: ["score", "scoreType"],
+  methods: {
+    increaseScore(amount) {
+      this.$emit("increase", amount);
     },
-    props: ["score", "scoreType"],
-    methods: {
-      increaseScore(amount) {
-        this.$emit("increase", amount);
-      },
-      decreaseScore(amount) {
-        this.$emit("decrease", amount);
-      },
-    },
-  };
+    decreaseScore(amount) {
+      this.$emit("decrease", amount);
+    }
+  }
+};
 </script>
 
 <style>
-  .score-button {
-    margin: 0.5em;
-  }
-  .score-total {
-    font-size: 100px;
-    margin: 0.5em;
-  }
+.score-button {
+  margin: 0.5em;
+}
+.score-total {
+  font-size: 100px;
+  margin: 0.5em;
+}
 </style>
